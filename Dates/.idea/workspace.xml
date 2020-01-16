@@ -6,7 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1d1798c-f9d7-4aa4-88cf-b8f5fe9a2be2" name="Default Changelist" comment="" />
+    <list default="true" id="e1d1798c-f9d7-4aa4-88cf-b8f5fe9a2be2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Authorities/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Authorities/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Weathers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,10 +23,14 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1WRqMPSRrK6vMNQo420Fjsw8Xp4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -111,7 +118,7 @@
       <option name="presentableId" value="Default" />
       <updated>1579122706244</updated>
       <workItem from="1579122709370" duration="1108000" />
-      <workItem from="1579183787762" duration="2266000" />
+      <workItem from="1579183787762" duration="2869000" />
     </task>
     <servers />
   </component>

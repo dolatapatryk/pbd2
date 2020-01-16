@@ -1,10 +1,5 @@
-import java.lang.{ArrayIndexOutOfBoundsException, Exception}
-import java.util.{Calendar, Date}
-
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 import org.apache.spark.{SparkConf, SparkContext}
-
-import scala.collection.mutable.ListBuffer
 
 object Test {
 
@@ -12,22 +7,21 @@ object Test {
     val conf: SparkConf = new SparkConf().
       setMaster("local").
       setAppName("test")
-    val sc: SparkContext = new SparkContext(conf)
     val spark: SparkSession = SparkSession.builder().
       config(conf).
       enableHiveSupport().
       getOrCreate()
-    spark.sparkContext.setLogLevel("WARN")
+    spark.sparkContext.setLogLevel("ERROR")
     import spark.implicits._
 
-    val weatherFile = spark.read.textFile("/home/patryk/pbd2/uk-trafic/weather.txt")
+    val weatherFile = spark.read.textFile("weather.txt")
     val weather = weatherFile.rdd.
       map(weather => {
         val splitted = weather.split(" ")
         val s = splitted(6).split("/")
         val hourSplitted = splitted(8).split(":")
         var r = s(2) + s(1) + s(0)
-        if(hourSplitted.length < 2) {
+        if (hourSplitted.length < 2) {
           r = r + "0000"
         } else {
           r = r + hourSplitted(0) + hourSplitted(1);
@@ -38,23 +32,21 @@ object Test {
     val weatherTable = getFikcyjnaTabela(weatherFile, spark)
     val joinedWeather = weather.join(weatherTable, weather("weather") === weatherTable("weather"))
       .orderBy("authority", "date").collect()
-
-    val northEnglandMainData = spark.read.format("org.apache.spark.csv").
-      option("header", "true").option("inferSchema", "true").
-      csv("/home/patryk/pbd2/uk-trafic/mainDataNorthEngland.csv")
+//    val northEnglandMainData = spark.read.format("org.apache.spark.csv").
+//      option("header", "true").option("inferSchema", "true").
+//      csv("/home/patryk/pbd2/uk-trafic/mainDataNorthEngland.csv")
     val scotlandMainData = spark.read.format("org.apache.spark.csv").
       option("header", "true").option("inferSchema", "true").
-      csv("/home/patryk/pbd2/uk-trafic/mainDataScotland.csv")
-    val southEnglandMainData = spark.read.format("org.apache.spark.csv").
-      option("header", "true").option("inferSchema", "true").
-      csv("/home/patryk/pbd2/uk-trafic/mainDataSouthEngland.csv")
-    val mainData = northEnglandMainData.
-      union(scotlandMainData).union(southEnglandMainData)
+      csv("mainDataScotland.csv")
+//    val southEnglandMainData = spark.read.format("org.apache.spark.csv").
+//      option("header", "true").option("inferSchema", "true").
+//      csv("/home/patryk/pbd2/uk-trafic/mainDataSouthEngland.csv")
+//    val mainData = northEnglandMainData.
+//      union(scotlandMainData).union(southEnglandMainData)
+    val mainData = scotlandMainData
     val x = mainData.select("count_point_id", "year", "count_date", "hour",
-      "pedal_cycles", "local_authority_ons_code", "pedal_cycles", "two_wheeled_motor_vehicles",
-      "cars_and_taxis", "buses_and_coaches", "lgvs", "hgvs_2_rigid_axle", "hgvs_3_rigid_axle",
-      "hgvs_4_or_more_rigid_axle", "hgvs_3_or_4_articulated_axle", "hgvs_5_articulated_axle",
-      "hgvs_6_articulated_axle", "all_hgvs", "all_motor_vehicles").rdd.
+      "pedal_cycles", "local_authoirty_ons_code", "pedal_cycles", "two_wheeled_motor_vehicles",
+      "cars_and_taxis", "buses_and_coaches", "lgvs", "all_hgvs", "all_motor_vehicles").rdd.
       map(e => {
         var date = e.getTimestamp(e.fieldIndex("count_date")).toString.substring(0, 10).
           replace("-", "")
@@ -63,9 +55,9 @@ object Test {
           date = date + "0"
         }
         (e.getInt(e.fieldIndex("count_point_id")), (date + hour + "00").toLong,
-          e.getString(e.fieldIndex("local_authority_ons_code")))
-      }).toDF("count_point_id", "date", "local_authority_ons_code").
-      orderBy("local_authority_ons_code", "date")
+          e.getString(e.fieldIndex("local_authoirty_ons_code")))
+      }).toDF("count_point_id", "date", "local_authoirty_ons_code").
+      orderBy("local_authoirty_ons_code", "date")
     var i = 0
     var k = 0
     val dateIndex = joinedWeather(0).fieldIndex("date")
@@ -74,11 +66,11 @@ object Test {
     x.collect().foreach(row => {
       val rowDate = row.getLong(row.fieldIndex("date"))
       var weather = joinedWeather(i)
-      val rowAuthority = row.getString(row.fieldIndex("local_authority_ons_code"))
+      val rowAuthority = row.getString(row.fieldIndex("local_authoirty_ons_code"))
       while (joinedWeather.length > i && weather.getLong(dateIndex) < rowDate &&
         weather.getString(authorityIndex).equals(rowAuthority)) {
-        weather = joinedWeather(i)
         i = i + 1
+        weather = joinedWeather(i)
       }
       if (joinedWeather.length > i) {
         var previousWeather = joinedWeather(i - 1)
@@ -87,7 +79,7 @@ object Test {
           rowDate)
         println(rowDate + " " + previousWeather + " " + weather + " " + closestWeatherId)
         k = k + 1
-        if(k > 20) {
+        if (k > 20) {
           return
         }
       }
@@ -119,12 +111,12 @@ object Test {
   }
 
   def getClosestWeatherId(lowerWeatherDate: Long, lowerWeatherId: Int, higherWeatherDate: Long, higherWeatherId: Int, referenceDate: Long): Int = {
-    if (referenceDate - lowerWeatherDate > 2 || higherWeatherDate - referenceDate > 2)
-      return -1;
+//    if (referenceDate - lowerWeatherDate > 2 || higherWeatherDate - referenceDate > 2)
+//      return -1;
     if (referenceDate - lowerWeatherDate > higherWeatherDate - referenceDate)
-      lowerWeatherId;
-    else {
       higherWeatherId;
+    else {
+      lowerWeatherId;
     }
   }
 }
