@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="40044d6e-87be-459c-90dc-85ce4403f12f" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1W4pGEMRD0yaomc5c6oT225kTjF" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Weathers" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="scalaaaa" />
+      <option name="PROGRAM_PARAMETERS" value="2000 2018" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="scalaaaa" />
+              <option name="path" value="$PROJECT_DIR$" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="scalaaaa [file:/home/patryk/scalaaaa/]" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
+                <option name="name" value="scalaaaa-build" />
+                <option name="path" value="$PROJECT_DIR$/project" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="modificationStamps">
+      <map>
+        <entry key="$PROJECT_DIR$" value="3157519555452" />
+        <entry key="$PROJECT_DIR$/build.sbt" value="1304690349" />
+        <entry key="$PROJECT_DIR$/project/build.properties" value="3724303870" />
+      </map>
+    </option>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="40044d6e-87be-459c-90dc-85ce4403f12f" name="Default Changelist" comment="" />
+      <created>1578418623149</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578418623149</updated>
+      <workItem from="1578418626286" duration="680000" />
+      <workItem from="1578425801198" duration="23000" />
+      <workItem from="1579028451449" duration="1673000" />
+      <workItem from="1579034984893" duration="1372000" />
+      <workItem from="1579097705284" duration="12285000" />
+      <workItem from="1579112560978" duration="85000" />
+      <workItem from="1579120335901" duration="3260000" />
+      <workItem from="1579182118004" duration="767000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2488" y="138" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579028507062">
+      <screen x="2384" y="0" width="1280" height="960" />
+    </state>
+    <state x="2488" y="138" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579028507062" />
+    <state x="2643" y="243" key="#xdebugger.evaluate" timestamp="1579104239241">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2643" y="243" key="#xdebugger.evaluate/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579104239241" />
+    <state x="2549" y="268" key="FileChooserDialogImpl" timestamp="1579183080732">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2549" y="268" key="FileChooserDialogImpl/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579183080732" />
+    <state x="2803" y="238" key="FileChooserDialogImpl/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1578425822976" />
+    <state x="629" y="259" key="FileChooserDialogImpl/0.0.1920.1044@0.0.1920.1044" timestamp="1579122881494" />
+    <state width="1872" height="520" key="GridCell.Tab.0.bottom" timestamp="1579110844846">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="520" key="GridCell.Tab.0.bottom/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579110844846" />
+    <state width="1232" height="247" key="GridCell.Tab.0.bottom/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579036220559" />
+    <state width="1872" height="520" key="GridCell.Tab.0.center" timestamp="1579110844846">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="520" key="GridCell.Tab.0.center/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579110844846" />
+    <state width="1232" height="247" key="GridCell.Tab.0.center/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579036220559" />
+    <state width="1872" height="520" key="GridCell.Tab.0.left" timestamp="1579110844846">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="520" key="GridCell.Tab.0.left/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579110844846" />
+    <state width="1232" height="247" key="GridCell.Tab.0.left/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579036220559" />
+    <state width="1872" height="520" key="GridCell.Tab.0.right" timestamp="1579110844846">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="520" key="GridCell.Tab.0.right/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579110844846" />
+    <state width="1232" height="247" key="GridCell.Tab.0.right/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579036220559" />
+    <state width="1872" height="354" key="GridCell.Tab.1.bottom" timestamp="1579110630849">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="354" key="GridCell.Tab.1.bottom/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579110630849" />
+    <state width="1232" height="306" key="GridCell.Tab.1.bottom/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579029674348" />
+    <state width="1872" height="354" key="GridCell.Tab.1.center" timestamp="1579110630849">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="354" key="GridCell.Tab.1.center/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579110630849" />
+    <state width="1232" height="306" key="GridCell.Tab.1.center/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579029674348" />
+    <state width="1872" height="354" key="GridCell.Tab.1.left" timestamp="1579110630849">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="354" key="GridCell.Tab.1.left/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579110630849" />
+    <state width="1232" height="306" key="GridCell.Tab.1.left/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579029674348" />
+    <state width="1872" height="354" key="GridCell.Tab.1.right" timestamp="1579110630849">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1872" height="354" key="GridCell.Tab.1.right/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579110630849" />
+    <state width="1232" height="306" key="GridCell.Tab.1.right/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579029674348" />
+    <state x="2112" y="65" key="SettingsEditor" timestamp="1579100877652">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2112" y="65" key="SettingsEditor/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579100877652" />
+    <state x="2512" y="58" key="SettingsEditor/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1578418779214" />
+    <state width="960" height="540" key="XDebugger.FullValuePopup" timestamp="1579109431410">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="960" height="540" key="XDebugger.FullValuePopup/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579109431410" />
+    <state x="2334" y="423" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1579100591015">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2334" y="423" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579100591015" />
+    <state x="2660" y="376" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1578418763379" />
+    <state width="300" height="154" key="javadoc.popup.new" timestamp="1579121403124">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="300" height="154" key="javadoc.popup.new/0.0.1920.1044@0.0.1920.1044" timestamp="1579121403124" />
+    <state x="577" y="248" width="755" height="546" key="new project wizard" timestamp="1579120410520">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="577" y="248" width="755" height="546" key="new project wizard/0.0.1920.1044@0.0.1920.1044" timestamp="1579120410520" />
+    <state x="2544" y="247" key="run.anything.popup" timestamp="1579101070748">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2544" y="247" key="run.anything.popup/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579101070748" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="weather.show()" language="Scala" />
+        <watch expression="joinedWeather.length" language="Scala" />
+        <watch expression="x.select(&quot;local_authority_ons_code&quot;).distinct().show()" language="Scala" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
