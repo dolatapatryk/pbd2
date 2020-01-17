@@ -1,6 +1,7 @@
 import java.sql.Timestamp
 import java.util.{Calendar, Date}
 
+import org.apache.log4j.{Level, LogManager}
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.udf
@@ -11,6 +12,8 @@ object Facts {
 
   def main(args: Array[String]): Unit = {
     val inputDirectory = args(0)
+    val logger = LogManager.getLogger("projekt")
+    logger.setLevel(Level.INFO)
 
     val conf: SparkConf = new SparkConf().
       //      setMaster("local").
@@ -73,6 +76,7 @@ object Facts {
     val authorityIndex = joinedWeather(0).fieldIndex("authority")
     val indexId = joinedWeather(0).fieldIndex("id")
     val xy = x.distinct().collect()
+    logger.info("przed wyznaczaniem pogody")
     xy.foreach(row => {
       val rowDate = row.getLong(row.fieldIndex("date"))
       val countPointId = row.getInt(row.fieldIndex("count_point_id"))
@@ -80,44 +84,54 @@ object Facts {
       val rowAuthority = row.getString(row.fieldIndex("local_authority_ons_code"))
       var weatherAuthority = weather.getString(authorityIndex)
       //skipujemy dopoki zaczna sie pogody dla naszego regionu
-      breakable {
-        while (!rowAuthority.equals(weather.getString(authorityIndex)) &&
-          rowAuthority > weatherAuthority) {
-          if (i == joinedWeather.length - 1) {
-            break
-          }
+      if (!rowAuthority.equals(weather.getString(authorityIndex))) {
+        i = joinedWeather.indexWhere(w => w.getString(authorityIndex).equals(rowAuthority))
+      }
+//      breakable {
+//        while (!rowAuthority.equals(weather.getString(authorityIndex)) &&
+//          rowAuthority > weatherAuthority) {
+//          logger.info("skipuje pogode dla rowAuthority: {}, rowDate: {}, " +
+//            "countPointId: {}, ", rowAuthority, rowDate, countPointId)
+//          if (i == joinedWeather.length - 1) {
+//            break
+//          }
+//          i = i + 1
+//          weather = joinedWeather(i)
+//        }
+//      }
+      var weatherId = -1
+      if(i != -1) {
+        weather = joinedWeather(i)
+        //szukamy pierwszej wiekszej pogody
+        while (joinedWeather.length > i && weather.getLong(dateIndex) < rowDate &&
+          weather.getString(authorityIndex).equals(rowAuthority)) {
           i = i + 1
           weather = joinedWeather(i)
         }
-      }
-      //szukamy pierwszej wiekszej pogody
-      while (joinedWeather.length > i && weather.getLong(dateIndex) < rowDate &&
-        weather.getString(authorityIndex).equals(rowAuthority)) {
-        i = i + 1
-        weather = joinedWeather(i)
-      }
-      if (joinedWeather.length > i) {
-        var previousWeather = joinedWeather(i)
-        if (i > 0) {
-          previousWeather = joinedWeather(i - 1)
-        }
-        var weatherId = -1
-        val previousAuthority = previousWeather.getString(authorityIndex)
-        weatherAuthority = weather.getString(authorityIndex)
-        // moze sie zdarzyc ze weather nalezy juz do nastepnego regionu wiec wtedy bierzemy wartosc z previous
-        if (previousAuthority.equals(rowAuthority) && weatherAuthority.equals(rowAuthority)) {
-          weatherId = getClosestWeatherId(previousWeather.getLong(dateIndex),
-            previousWeather.getInt(indexId), weather.getLong(dateIndex), weather.getInt(indexId),
-            rowDate)
-        } else if (previousAuthority.equals(rowAuthority)) {
-          if (rowDate - previousWeather.getLong(dateIndex) <= 50000) {
-            weatherId = previousWeather.getInt(indexId)
+        if (joinedWeather.length > i) {
+          var previousWeather = joinedWeather(i)
+          if (i > 0) {
+            previousWeather = joinedWeather(i - 1)
+          }
+          weatherId = -1
+          val previousAuthority = previousWeather.getString(authorityIndex)
+          weatherAuthority = weather.getString(authorityIndex)
+          // moze sie zdarzyc ze weather nalezy juz do nastepnego regionu wiec wtedy bierzemy wartosc z previous
+          if (previousAuthority.equals(rowAuthority) && weatherAuthority.equals(rowAuthority)) {
+            weatherId = getClosestWeatherId(previousWeather.getLong(dateIndex),
+              previousWeather.getInt(indexId), weather.getLong(dateIndex), weather.getInt(indexId),
+              rowDate)
+          } else if (previousAuthority.equals(rowAuthority)) {
+            if (rowDate - previousWeather.getLong(dateIndex) <= 50000) {
+              weatherId = previousWeather.getInt(indexId)
+            }
           }
         }
-        val hash = (countPointId, rowDate, rowAuthority).hashCode()
-        list = list :+ ((hash, weatherId))
       }
+      val hash = (countPointId, rowDate, rowAuthority).hashCode()
+      list = list :+ ((hash, weatherId))
     })
+    logger.info("skonczone wyznaczanie pogody")
     val listDS = list.toDS().withColumnRenamed("_1", "hash").
       withColumnRenamed("_2", "weatherId").distinct()
     val result = mainData.select("count_point_id", "direction_of_travel", "count_date", "hour",
