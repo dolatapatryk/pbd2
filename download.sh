@@ -12,6 +12,7 @@ echo "wypakowano"
 rm uk-trafic.zip
 
 cd ..
+hadoop fs -rm -r -f projekt/
 hadoop fs -mkdir -p projekt/
 hadoop fs -copyFromLocal input projekt/
 echo "skopiowano"

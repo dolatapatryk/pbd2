@@ -27,7 +27,7 @@ object Facts {
     val vehicleTypes = Seq((1, "pedal_cycles"), (2, "two_wheeled_motor_vehicles"), (3, "cars_and_taxis"),
       (4, "buses_and_coaches"), (5, "lgvs"), (6, "all_hgvs"), (7, "all_motor_vehicles"))
 
-    val weatherFile = spark.read.textFile("weather.txt")
+    val weatherFile = spark.read.textFile(inputDirectory + "weather.txt")
     val weather = weatherFile.rdd.
       map(weather => {
         val splitted = weather.split(" ")
@@ -42,7 +42,7 @@ object Facts {
         (r.toLong, splitted(4), mapWeatherLine(weather))
       }).toDF("date", "authority", "weather")
     spark.sql("use traffic")
-    val weatherTable = spark.sql("select id, weather from weather")
+    val weatherTable = spark.sql("select id, weather from weathers")
     //    val weatherTable = getFikcyjnaTabela(weatherFile, spark)
     val joinedWeather = weather.join(weatherTable, weather("weather") === weatherTable("weather"))
       .orderBy("authority", "date").collect()

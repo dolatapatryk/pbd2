@@ -2,40 +2,15 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="unnamed" />
+      <artifact name="facts" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40044d6e-87be-459c-90dc-85ce4403f12f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Authorities/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Authorities/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Dates/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Dates/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../VehicleTypes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VehicleTypes/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/derby.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/db.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/log/log.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/log/log1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c180.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c180.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c191.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c191.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c1a1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c1a1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c1b1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c1b1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/src/main/scala/Weathers.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/src/main/scala/Weathers.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/target/scala-2.11/classes/Weathers$$anonfun$mapWeatherLine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/target/scala-2.11/classes/Weathers$$anonfun$mapWeatherLine$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/target/scala-2.11/classes/Weathers$.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/target/scala-2.11/classes/Weathers$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fillTables.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../fillTables.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hive.hql" beforeDir="false" afterPath="$PROJECT_DIR$/../hive.hql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../download.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../download.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../facts.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../facts.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metastore_db/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/metastore_db/db.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metastore_db/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/metastore_db/log/log.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metastore_db/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/metastore_db/log/log1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metastore_db/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/metastore_db/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metastore_db/seg0/c180.dat" beforeDir="false" afterPath="$PROJECT_DIR$/metastore_db/seg0/c180.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metastore_db/seg0/c191.dat" beforeDir="false" afterPath="$PROJECT_DIR$/metastore_db/seg0/c191.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metastore_db/seg0/c1a1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/metastore_db/seg0/c1a1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metastore_db/seg0/c1b1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/metastore_db/seg0/c1b1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/Test.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Facts.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../weathers.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../weathers.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/Facts.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Facts.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +137,7 @@
       <workItem from="1579192022109" duration="5389000" />
       <workItem from="1579201052248" duration="4638000" />
       <workItem from="1579208810623" duration="1663000" />
-      <workItem from="1579272927982" duration="17306000" />
+      <workItem from="1579272927982" duration="18419000" />
     </task>
     <servers />
   </component>
