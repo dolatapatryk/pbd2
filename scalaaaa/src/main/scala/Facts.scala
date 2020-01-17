@@ -2,16 +2,18 @@ import java.sql.Timestamp
 import java.util.{Calendar, Date}
 
 import org.apache.spark.SparkConf
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.udf
-import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 
 import scala.util.control.Breaks._
 
-object Test {
+object Facts {
 
   def main(args: Array[String]): Unit = {
+    val inputDirectory = args(0)
+
     val conf: SparkConf = new SparkConf().
-      setMaster("local").
+      //      setMaster("local").
       setAppName("facts")
     val spark: SparkSession = SparkSession.builder().
       config(conf).
@@ -23,8 +25,7 @@ object Test {
     val getFakeDateUdf = udf(getFakeDate)
     val getHashUdf = udf(getHash)
     val vehicleTypes = Seq((1, "pedal_cycles"), (2, "two_wheeled_motor_vehicles"), (3, "cars_and_taxis"),
-      (4, "buses_and_coaches"), (5, "lgvs"), (6, "all_hgvs"), (7, "all_motor_vehicles")).
-      toDF("type_id", "type_name")
+      (4, "buses_and_coaches"), (5, "lgvs"), (6, "all_hgvs"), (7, "all_motor_vehicles"))
 
     val weatherFile = spark.read.textFile("weather.txt")
     val weather = weatherFile.rdd.
@@ -40,22 +41,23 @@ object Test {
         }
         (r.toLong, splitted(4), mapWeatherLine(weather))
       }).toDF("date", "authority", "weather")
-    //    val weatherTable = spark.sql("select id, weather from weather")
-    val weatherTable = getFikcyjnaTabela(weatherFile, spark)
+    spark.sql("use traffic")
+    val weatherTable = spark.sql("select id, weather from weather")
+    //    val weatherTable = getFikcyjnaTabela(weatherFile, spark)
     val joinedWeather = weather.join(weatherTable, weather("weather") === weatherTable("weather"))
       .orderBy("authority", "date").collect()
-    //    val northEnglandMainData = spark.read.format("org.apache.spark.csv").
-    //      option("header", "true").option("inferSchema", "true").
-    //      csv("/home/patryk/pbd2/uk-trafic/mainDataNorthEngland.csv")
+    val northEnglandMainData = spark.read.format("org.apache.spark.csv").
+      option("header", "true").option("inferSchema", "true").
+      csv(inputDirectory + "mainDataNorthEngland.csv")
     val scotlandMainData = spark.read.format("org.apache.spark.csv").
       option("header", "true").option("inferSchema", "true").
-      csv("mainDataScotland.csv")
-    //    val southEnglandMainData = spark.read.format("org.apache.spark.csv").
-    //      option("header", "true").option("inferSchema", "true").
-    //      csv("/home/patryk/pbd2/uk-trafic/mainDataSouthEngland.csv")
-    //    val mainData = northEnglandMainData.
-    //      union(scotlandMainData).union(southEnglandMainData)
-    val mainData = scotlandMainData
+      csv(inputDirectory + "mainDataScotland.csv")
+    val southEnglandMainData = spark.read.format("org.apache.spark.csv").
+      option("header", "true").option("inferSchema", "true").
+      csv(inputDirectory + "mainDataSouthEngland.csv")
+    val mainData = northEnglandMainData.
+      union(scotlandMainData).union(southEnglandMainData)
+    //    val mainData = scotlandMainData
     val x = mainData.select("count_point_id", "local_authoirty_ons_code", "count_date", "hour").
       withColumn("date", getFakeDateUdf($"count_date", $"hour")).
       withColumnRenamed("local_authoirty_ons_code", "local_authority_ons_code").rdd.
@@ -67,7 +69,6 @@ object Test {
 
     var list: List[(Int, Int)] = List()
     var i = 0
-    var k = 0
     val dateIndex = joinedWeather(0).fieldIndex("date")
     val authorityIndex = joinedWeather(0).fieldIndex("authority")
     val indexId = joinedWeather(0).fieldIndex("id")
@@ -128,8 +129,30 @@ object Test {
       drop("hash", "count_point_id", "direction_of_travel", "count_date", "fake_date").
       withColumnRenamed("date", "dateId")
 
+    // local_authority_ons_code, weatherId, dateId, hour, vehicle_type_id, count
     mainJoinWithWeather.foreach(row => {
-      row.
+      val local_authority_ons_code = row.getString(row.fieldIndex("local_authority_ons_code"))
+      val weatherId = row.getInt(row.fieldIndex("weatherId"))
+      val dateId = row.getInt(row.fieldIndex("dateId"))
+      val hour = row.getInt(row.fieldIndex("hour"))
+      vehicleTypes.foreach(e => {
+        val vehicleTypeId = e._1
+        var count = 0
+        if (vehicleTypeId == 1 || vehicleTypeId == 2) {
+          count = row.getDouble(row.fieldIndex(e._2)).toInt
+        } else {
+          count = row.getInt(row.fieldIndex(e._2))
+        }
+
+        spark.createDataset(Seq((local_authority_ons_code, weatherId, dateId, hour, vehicleTypeId, count))).
+          withColumnRenamed("_1", "local_authority_ons_code").
+          withColumnRenamed("_2", "weatherId").
+          withColumnRenamed("_3", "dateId").
+          withColumnRenamed("_4", "hour").
+          withColumnRenamed("_5", "vehicle_type_id").
+          withColumnRenamed("_6", "count").
+          write.mode("append").insertInto("facts")
+      })
     })
   }
 
@@ -161,13 +184,13 @@ object Test {
     weather.substring(0, weather.length - 1)
   }
 
-  def getFikcyjnaTabela(weatherFile: Dataset[String], spark: SparkSession): DataFrame = {
-    import spark.implicits._
-    val weathers = weatherFile.rdd.map(line => mapWeatherLine(line)).distinct()
-    weathers.map(weather => {
-      (weather.hashCode, weather)
-    }).toDF("id", "weather")
-  }
+  //  def getFikcyjnaTabela(weatherFile: Dataset[String], spark: SparkSession): DataFrame = {
+  //    import spark.implicits._
+  //    val weathers = weatherFile.rdd.map(line => mapWeatherLine(line)).distinct()
+  //    weathers.map(weather => {
+  //      (weather.hashCode, weather)
+  //    }).toDF("id", "weather")
+  //  }
 
   def getClosestWeatherId(lowerWeatherDate: Long, lowerWeatherId: Int, higherWeatherDate: Long, higherWeatherId: Int, referenceDate: Long): Int = {
     if (referenceDate - lowerWeatherDate > higherWeatherDate - referenceDate)

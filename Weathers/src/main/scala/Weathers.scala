@@ -6,7 +6,7 @@ object Weathers {
     val inputDirectory = args(0)
 
     val conf: SparkConf = new SparkConf().
-      setMaster("local").
+      //      setMaster("local").
       setAppName("weather")
     val spark: SparkSession = SparkSession.builder().
       config(conf).
@@ -14,7 +14,7 @@ object Weathers {
       getOrCreate()
     import spark.implicits._
 
-    val weather = spark.read.textFile("weather.txt").rdd.
+    val weather = spark.read.textFile(inputDirectory + "weather.txt").rdd.
       map(line => mapWeatherLine(line)).
       distinct().
       map(weather => {
@@ -27,6 +27,10 @@ object Weathers {
     weather.
       select($"id", $"weather").
       write.mode("overwrite").saveAsTable("weathers")
+    spark.createDataset(Seq((-1, "Not defined"))).
+      withColumnRenamed("_1", "id").
+      withColumnRenamed("_2", "weather").
+      write.mode("append").insertInto("weathers")
   }
 
   def mapWeatherLine(line: String): String = {
