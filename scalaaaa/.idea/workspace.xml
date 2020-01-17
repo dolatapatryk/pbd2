@@ -7,10 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40044d6e-87be-459c-90dc-85ce4403f12f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../download.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../download.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../facts.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../facts.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fillTables.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../fillTables.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/Facts.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Facts.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +135,7 @@
       <workItem from="1579192022109" duration="5389000" />
       <workItem from="1579201052248" duration="4638000" />
       <workItem from="1579208810623" duration="1663000" />
-      <workItem from="1579272927982" duration="18419000" />
+      <workItem from="1579272927982" duration="19966000" />
     </task>
     <servers />
   </component>
@@ -226,11 +224,11 @@
     </state>
     <state x="2334" y="423" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579100591015" />
     <state x="2660" y="376" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1578418763379" />
-    <state width="300" height="142" key="javadoc.popup.new" timestamp="1579291782865">
+    <state width="300" height="142" key="javadoc.popup.new" timestamp="1579294465591">
       <screen x="2384" y="0" width="1280" height="960" />
     </state>
     <state width="300" height="160" key="javadoc.popup.new/0.0.1920.1044/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579195925241" />
-    <state width="300" height="142" key="javadoc.popup.new/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579291782865" />
+    <state width="300" height="142" key="javadoc.popup.new/0.0.1920.1044/2384.0.1280.960@2384.0.1280.960" timestamp="1579294465591" />
     <state width="300" height="154" key="javadoc.popup.new/0.0.1920.1044@0.0.1920.1044" timestamp="1579210316307" />
     <state x="2497" y="257" width="755" height="546" key="new project wizard" timestamp="1579193887832">
       <screen x="1920" y="0" width="1920" height="1080" />
