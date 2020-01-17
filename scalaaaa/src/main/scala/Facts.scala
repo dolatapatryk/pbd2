@@ -97,7 +97,10 @@ object Facts {
         weather = joinedWeather(i)
       }
       if (joinedWeather.length > i) {
-        val previousWeather = joinedWeather(i - 1)
+        var previousWeather = joinedWeather(i)
+        if (i > 0) {
+          previousWeather = joinedWeather(i - 1)
+        }
         var weatherId = -1
         val previousAuthority = previousWeather.getString(authorityIndex)
         weatherAuthority = weather.getString(authorityIndex)

@@ -9,6 +9,7 @@
     <list default="true" id="40044d6e-87be-459c-90dc-85ce4403f12f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../fillTables.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../fillTables.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/Facts.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/Facts.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +136,7 @@
       <workItem from="1579192022109" duration="5389000" />
       <workItem from="1579201052248" duration="4638000" />
       <workItem from="1579208810623" duration="1663000" />
-      <workItem from="1579272927982" duration="19966000" />
+      <workItem from="1579272927982" duration="20677000" />
     </task>
     <servers />
   </component>
