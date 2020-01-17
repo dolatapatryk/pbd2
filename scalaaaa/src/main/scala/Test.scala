@@ -1,18 +1,30 @@
+import java.sql.Timestamp
+import java.util.{Calendar, Date}
+
+import org.apache.spark.SparkConf
+import org.apache.spark.sql.functions.udf
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
-import org.apache.spark.{SparkConf, SparkContext}
+
+import scala.util.control.Breaks._
 
 object Test {
 
   def main(args: Array[String]): Unit = {
     val conf: SparkConf = new SparkConf().
       setMaster("local").
-      setAppName("test")
+      setAppName("facts")
     val spark: SparkSession = SparkSession.builder().
       config(conf).
       enableHiveSupport().
       getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
     import spark.implicits._
+    val getDateIdUdf = udf(getDateId)
+    val getFakeDateUdf = udf(getFakeDate)
+    val getHashUdf = udf(getHash)
+    val vehicleTypes = Seq((1, "pedal_cycles"), (2, "two_wheeled_motor_vehicles"), (3, "cars_and_taxis"),
+      (4, "buses_and_coaches"), (5, "lgvs"), (6, "all_hgvs"), (7, "all_motor_vehicles")).
+      toDF("type_id", "type_name")
 
     val weatherFile = spark.read.textFile("weather.txt")
     val weather = weatherFile.rdd.
@@ -32,65 +44,112 @@ object Test {
     val weatherTable = getFikcyjnaTabela(weatherFile, spark)
     val joinedWeather = weather.join(weatherTable, weather("weather") === weatherTable("weather"))
       .orderBy("authority", "date").collect()
-//    val northEnglandMainData = spark.read.format("org.apache.spark.csv").
-//      option("header", "true").option("inferSchema", "true").
-//      csv("/home/patryk/pbd2/uk-trafic/mainDataNorthEngland.csv")
+    //    val northEnglandMainData = spark.read.format("org.apache.spark.csv").
+    //      option("header", "true").option("inferSchema", "true").
+    //      csv("/home/patryk/pbd2/uk-trafic/mainDataNorthEngland.csv")
     val scotlandMainData = spark.read.format("org.apache.spark.csv").
       option("header", "true").option("inferSchema", "true").
       csv("mainDataScotland.csv")
-//    val southEnglandMainData = spark.read.format("org.apache.spark.csv").
-//      option("header", "true").option("inferSchema", "true").
-//      csv("/home/patryk/pbd2/uk-trafic/mainDataSouthEngland.csv")
-//    val mainData = northEnglandMainData.
-//      union(scotlandMainData).union(southEnglandMainData)
+    //    val southEnglandMainData = spark.read.format("org.apache.spark.csv").
+    //      option("header", "true").option("inferSchema", "true").
+    //      csv("/home/patryk/pbd2/uk-trafic/mainDataSouthEngland.csv")
+    //    val mainData = northEnglandMainData.
+    //      union(scotlandMainData).union(southEnglandMainData)
     val mainData = scotlandMainData
-    val x = mainData.select("count_point_id", "year", "count_date", "hour",
-      "pedal_cycles", "local_authoirty_ons_code", "pedal_cycles", "two_wheeled_motor_vehicles",
-      "cars_and_taxis", "buses_and_coaches", "lgvs", "all_hgvs", "all_motor_vehicles").rdd.
+    val x = mainData.select("count_point_id", "local_authoirty_ons_code", "count_date", "hour").
+      withColumn("date", getFakeDateUdf($"count_date", $"hour")).
+      withColumnRenamed("local_authoirty_ons_code", "local_authority_ons_code").rdd.
       map(e => {
-        var date = e.getTimestamp(e.fieldIndex("count_date")).toString.substring(0, 10).
-          replace("-", "")
-        val hour = e.getInt(e.fieldIndex("hour"))
-        if (hour < 10) {
-          date = date + "0"
-        }
-        (e.getInt(e.fieldIndex("count_point_id")), (date + hour + "00").toLong,
-          e.getString(e.fieldIndex("local_authoirty_ons_code")))
-      }).toDF("count_point_id", "date", "local_authoirty_ons_code").
-      orderBy("local_authoirty_ons_code", "date")
+        (e.getInt(e.fieldIndex("count_point_id")), e.getLong(e.fieldIndex("date")),
+          e.getString(e.fieldIndex("local_authority_ons_code")))
+      }).toDF("count_point_id", "date", "local_authority_ons_code").
+      orderBy("local_authority_ons_code", "date")
+
+    var list: List[(Int, Int)] = List()
     var i = 0
     var k = 0
     val dateIndex = joinedWeather(0).fieldIndex("date")
     val authorityIndex = joinedWeather(0).fieldIndex("authority")
     val indexId = joinedWeather(0).fieldIndex("id")
-    x.collect().foreach(row => {
+    val xy = x.distinct().collect()
+    xy.foreach(row => {
       val rowDate = row.getLong(row.fieldIndex("date"))
+      val countPointId = row.getInt(row.fieldIndex("count_point_id"))
       var weather = joinedWeather(i)
-      val rowAuthority = row.getString(row.fieldIndex("local_authoirty_ons_code"))
+      val rowAuthority = row.getString(row.fieldIndex("local_authority_ons_code"))
+      var weatherAuthority = weather.getString(authorityIndex)
+      //skipujemy dopoki zaczna sie pogody dla naszego regionu
+      breakable {
+        while (!rowAuthority.equals(weather.getString(authorityIndex)) &&
+          rowAuthority > weatherAuthority) {
+          if (i == joinedWeather.length - 1) {
+            break
+          }
+          i = i + 1
+          weather = joinedWeather(i)
+        }
+      }
+      //szukamy pierwszej wiekszej pogody
       while (joinedWeather.length > i && weather.getLong(dateIndex) < rowDate &&
         weather.getString(authorityIndex).equals(rowAuthority)) {
         i = i + 1
         weather = joinedWeather(i)
       }
       if (joinedWeather.length > i) {
-        var previousWeather = joinedWeather(i - 1)
-        val closestWeatherId = getClosestWeatherId(previousWeather.getLong(dateIndex),
-          previousWeather.getInt(indexId), weather.getLong(dateIndex), weather.getInt(indexId),
-          rowDate)
-        println(rowDate + " " + previousWeather + " " + weather + " " + closestWeatherId)
-        k = k + 1
-        if (k > 20) {
-          return
+        val previousWeather = joinedWeather(i - 1)
+        var weatherId = -1
+        val previousAuthority = previousWeather.getString(authorityIndex)
+        weatherAuthority = weather.getString(authorityIndex)
+        // moze sie zdarzyc ze weather nalezy juz do nastepnego regionu wiec wtedy bierzemy wartosc z previous
+        if (previousAuthority.equals(rowAuthority) && weatherAuthority.equals(rowAuthority)) {
+          weatherId = getClosestWeatherId(previousWeather.getLong(dateIndex),
+            previousWeather.getInt(indexId), weather.getLong(dateIndex), weather.getInt(indexId),
+            rowDate)
+        } else if (previousAuthority.equals(rowAuthority)) {
+          if (rowDate - previousWeather.getLong(dateIndex) <= 50000) {
+            weatherId = previousWeather.getInt(indexId)
+          }
         }
+        val hash = (countPointId, rowDate, rowAuthority).hashCode()
+        list = list :+ ((hash, weatherId))
       }
     })
+    val listDS = list.toDS().withColumnRenamed("_1", "hash").
+      withColumnRenamed("_2", "weatherId").distinct()
+    val result = mainData.select("count_point_id", "direction_of_travel", "count_date", "hour",
+      "pedal_cycles", "local_authoirty_ons_code", "two_wheeled_motor_vehicles",
+      "cars_and_taxis", "buses_and_coaches", "lgvs", "all_hgvs", "all_motor_vehicles").
+      withColumn("date", getDateIdUdf($"count_date")).
+      withColumn("fake_date", getFakeDateUdf($"count_date", $"hour")).
+      withColumn("hash", getHashUdf($"count_point_id", $"fake_date", $"local_authoirty_ons_code")).
+      withColumnRenamed("local_authoirty_ons_code", "local_authority_ons_code")
 
-    //        mainData.select("count_point_id", "year", "count_date", "hour",
-    //          "pedal_cycles", "local_authority_ons_code", "pedal_cycles", "two_wheeled_motor_vehicles",
-    //          "cars_and_taxis", "buses_and_coaches", "lgvs", "hgvs_2_rigid_axle", "hgvs_3_rigid_axle",
-    //          "hgvs_4_or_more_rigid_axle", "hgvs_3_or_4_articulated_axle", "hgvs_5_articulated_axle",
-    //          "hgvs_6_articulated_axle", "all_hgvs", "all_motor_vehicles").
-    //      show(1)
+    val mainJoinWithWeather = result.join(listDS, "hash").
+      drop("hash", "count_point_id", "direction_of_travel", "count_date", "fake_date").
+      withColumnRenamed("date", "dateId")
+
+    mainJoinWithWeather.foreach(row => {
+      row.
+    })
+  }
+
+  def getDateId: Date => Int = (date: Date) => {
+    val calendar = Calendar.getInstance()
+    calendar.setTime(date)
+    (calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DATE)).hashCode()
+  }
+
+  def getFakeDate: (Timestamp, Int) => Long = (date: Timestamp, hour: Int) => {
+    var formattedDate = date.toString.substring(0, 10).
+      replace("-", "")
+    if (hour < 10) {
+      formattedDate = formattedDate + "0"
+    }
+    (formattedDate + hour + "00").toLong
+  }
+
+  def getHash: (Int, Long, String) => Int = (countPointId: Int, date: Long, authority: String) => {
+    (countPointId, date, authority).hashCode()
   }
 
   def mapWeatherLine(line: String): String = {
@@ -111,12 +170,18 @@ object Test {
   }
 
   def getClosestWeatherId(lowerWeatherDate: Long, lowerWeatherId: Int, higherWeatherDate: Long, higherWeatherId: Int, referenceDate: Long): Int = {
-//    if (referenceDate - lowerWeatherDate > 2 || higherWeatherDate - referenceDate > 2)
-//      return -1;
     if (referenceDate - lowerWeatherDate > higherWeatherDate - referenceDate)
-      higherWeatherId;
+      if (higherWeatherDate - referenceDate > 50000) {
+        -1
+      } else {
+        higherWeatherId
+      }
     else {
-      lowerWeatherId;
+      if (referenceDate - lowerWeatherDate > 50000) {
+        -1
+      } else {
+        lowerWeatherId
+      }
     }
   }
 }

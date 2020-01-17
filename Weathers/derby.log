@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Wed Jan 15 22:07:06 CET 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-016f-ab08-0077-000006e15f78 
-on database directory /home/patryk/Weathers/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@3fe46690 
+Fri Jan 17 16:53:08 CET 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-016f-b435-4821-0000072b8108 
+on database directory /home/patryk/pbd2/Weathers/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@3fe46690 
 Loaded from file:/home/patryk/.cache/coursier/v1/https/repo1.maven.org/maven2/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_222-b05
-user.dir=/home/patryk/Weathers
+user.dir=/home/patryk/pbd2/Weathers
 os.name=Linux
 os.arch=amd64
 os.version=5.3.7-arch1-1-ARCH

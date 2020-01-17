@@ -6,7 +6,7 @@ object Weathers {
     val inputDirectory = args(0)
 
     val conf: SparkConf = new SparkConf().
-//      setMaster("local").
+      setMaster("local").
       setAppName("weather")
     val spark: SparkSession = SparkSession.builder().
       config(conf).
@@ -14,7 +14,7 @@ object Weathers {
       getOrCreate()
     import spark.implicits._
 
-    val weather = spark.read.textFile(inputDirectory + "weather.txt").rdd.
+    val weather = spark.read.textFile("weather.txt").rdd.
       map(line => mapWeatherLine(line)).
       distinct().
       map(weather => {
