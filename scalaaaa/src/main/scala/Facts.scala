@@ -20,7 +20,7 @@ object Facts {
     logger.setLevel(Level.INFO)
 
     val conf: SparkConf = new SparkConf().
-      setMaster("local").
+//      setMaster("local").
       setAppName("facts")
     val spark: SparkSession = SparkSession.builder().
       config(conf).
@@ -108,7 +108,7 @@ object Facts {
       .toDF("authority2", "date", "dateMs", "dateId", "hour", "vehicleTypeId", "value").distinct().as[FactsRaw]
 
     val factsWithWeather = dataOnlyNeededColumns.join(withBothDates, dataOnlyNeededColumns("authority2") === withBothDates("authority") &&
-      //       abs(dataOnlyNeededColumns("dateMs") - withBothDates("dateMs")) < 172800000 &&
+      abs(dataOnlyNeededColumns("dateMs") - withBothDates("dateMs")) < 172800000 &&
       dataOnlyNeededColumns("dateMs") >= withBothDates("minDateMs") && dataOnlyNeededColumns("dateMs") < withBothDates("maxDateMs"))
 
 

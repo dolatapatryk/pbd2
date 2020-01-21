@@ -7,33 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2abb05da-f71b-4b09-9b84-5ec287a00ceb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Dates/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Dates/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../VehicleTypes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../VehicleTypes/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Weathers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/derby.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/db.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/log/log.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/log/log1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c180.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c180.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c191.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c191.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c1a1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c1a1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c1b1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/metastore_db/seg0/c1b1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/src/main/scala/Weathers.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/src/main/scala/Weathers.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/target/scala-2.11/classes/Weathers$$anonfun$mapWeatherLine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/target/scala-2.11/classes/Weathers$$anonfun$mapWeatherLine$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Weathers/target/scala-2.11/classes/Weathers$.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Weathers/target/scala-2.11/classes/Weathers$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fillTables.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../fillTables.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../hive.hql" beforeDir="false" afterPath="$PROJECT_DIR$/../hive.hql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../facts.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../facts.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../scalaaaa/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/metastore_db/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/metastore_db/db.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/metastore_db/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/metastore_db/log/log.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/metastore_db/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/metastore_db/log/log1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/metastore_db/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/metastore_db/log/logmirror.ctrl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/metastore_db/seg0/c180.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/metastore_db/seg0/c180.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/metastore_db/seg0/c191.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/metastore_db/seg0/c191.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/metastore_db/seg0/c1a1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/metastore_db/seg0/c1a1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/metastore_db/seg0/c1b1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/metastore_db/seg0/c1b1.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../scalaaaa/src/main/scala/Test.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/src/main/scala/Facts.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../weathers.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../weathers.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scalaaaa/src/main/scala/Facts.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../scalaaaa/src/main/scala/Facts.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +45,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../VehicleTypes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -191,6 +171,7 @@
       <workItem from="1579184022214" duration="3126000" />
       <workItem from="1579288817544" duration="110000" />
       <workItem from="1579291840523" duration="10000" />
+      <workItem from="1579593855675" duration="599000" />
     </task>
     <servers />
   </component>
